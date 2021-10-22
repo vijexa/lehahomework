@@ -9,7 +9,7 @@ class ReportBodySpec extends AnyFreeSpec with Matchers with EitherValues {
     "should leave two decimal places" in {
       assert(
         Domain
-          .ReportBody(BigDecimal("34534.4436357365783758"))
+          .ReportBody(Domain.Ruble(BigDecimal("34534.4436357365783758")))
           .asJson
           .noSpaces == """{"average":"34534.44"}""",
       )
@@ -18,7 +18,7 @@ class ReportBodySpec extends AnyFreeSpec with Matchers with EitherValues {
     "should round to two decimal places" in {
       assert(
         Domain
-          .ReportBody(BigDecimal("34534.479999"))
+          .ReportBody(Domain.Ruble(BigDecimal("34534.479999")))
           .asJson
           .noSpaces == """{"average":"34534.48"}""",
       )
@@ -27,7 +27,7 @@ class ReportBodySpec extends AnyFreeSpec with Matchers with EitherValues {
     "should append two decimal places" in {
       assert(
         Domain
-          .ReportBody(BigDecimal("34534"))
+          .ReportBody(Domain.Ruble(BigDecimal("34534")))
           .asJson
           .noSpaces == """{"average":"34534.00"}""",
       )
