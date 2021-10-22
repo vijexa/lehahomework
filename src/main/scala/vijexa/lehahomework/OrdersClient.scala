@@ -2,7 +2,7 @@ package vijexa.lehahomework
 
 import cats.effect.kernel.Async
 import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
+import cats.implicits._
 import org.http4s.BasicCredentials
 import org.http4s.Headers
 import org.http4s.Method._
@@ -39,7 +39,7 @@ case class OrdersClient[F[_]: Async](
       Headers(auth),
     )
 
-    client.run(req).use(resp => Sync[F].delay(resp.status))
+    client.run(req).use(resp => resp.status.pure[F])
   }
 
 }
